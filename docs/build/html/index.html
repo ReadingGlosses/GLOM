@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Introduction &#8212; GLOM 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=fb9458d3" />
+    <script src="_static/documentation_options.js?v=2709fde1"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="#">GLOM 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Introduction</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <nav class="contents" id="contents" role="doc-toc">
+<span id="top"></span><p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#introduction" id="id11">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#getting-glom" id="id12">Getting GLOM</a></p></li>
+<li><p><a class="reference internal" href="#running-glom" id="id13">Running GLOM</a></p></li>
+<li><p><a class="reference internal" href="#setting-up-glom" id="id14">Setting Up GLOM</a></p>
+<ul>
+<li><p><a class="reference internal" href="#the-input-file" id="id15">The Input File</a></p></li>
+<li><p><a class="reference internal" href="#glossing-conventions" id="id16">Glossing Conventions</a></p></li>
+<li><p><a class="reference internal" href="#dictionary-files" id="id17">Dictionary Files</a></p>
+<ul>
+<li><p><a class="reference internal" href="#affix-types" id="id18">Affix types</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#paradigm-files" id="id19">Paradigm Files</a></p>
+<ul>
+<li><p><a class="reference internal" href="#multi-dimensional-tables" id="id20">Multi-dimensional tables</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#sound-change-file-optional" id="id21">Sound Change File (Optional)</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#output-file" id="id22">Output File</a></p></li>
+</ul>
+</nav>
+<section id="introduction">
+<h1><a class="toc-backref" href="#id11" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h1>
+<p>GLOM is a tool that helps you organize your language, and generate glossed example sentences. It can read dictionary files (i.e. words and their translations) as well as tables (inflections, case markings, pronouns paradigms, etc.), and also supports sound change rules. The name GLOM stands for ‘GLOsses and MOrphemes’, but also alludes to that fact that you can ‘stick things together’ with it. It was created for people making their own languages, who have control over their morphology, but could plausible be used with natural languages if you structured your data the right way.</p>
+<p><a class="reference external" href="#top">Return to top</a></p>
+</section>
+<section id="getting-glom">
+<h1><a class="toc-backref" href="#id12" role="doc-backlink">Getting GLOM</a><a class="headerlink" href="#getting-glom" title="Link to this heading">¶</a></h1>
+<p>Download the zip file from GitHub &lt;<a class="reference external" href="https://github.com/ReadingGlosses/GLOM">https://github.com/ReadingGlosses/GLOM</a>&gt;here&lt;/a&gt;. Unzip it somewhere on your computer than you can remember later.</p>
+<p><a class="reference external" href="#top">Return to top</a></p>
+</section>
+<section id="running-glom">
+<h1><a class="toc-backref" href="#id13" role="doc-backlink">Running GLOM</a><a class="headerlink" href="#running-glom" title="Link to this heading">¶</a></h1>
+<p>When you download GLOM, it comes with language files for a mini-lang called “Tirilian”, so that you can immediately run it and see how it works, before you commit any time into setting up your own files. For some flavour, Tirilian is a language spoken by a fictitious human society, who live in a rigid legalistic culture. Only members of the Law Society are allowed to learn and use this language.</p>
+<p>GLOM uses a simple command line interface (CLI). To run GLOM with the included Tirilian files, you need open the Command Prompt (Windows) or Terminal (Mac) and run the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">ReadingGlosses</span>\<span class="n">GLOM</span>
+<span class="n">glom</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">input_file</span> <span class="n">tiril_sentences</span><span class="o">.</span><span class="n">txt</span> <span class="o">--</span><span class="n">output_file</span> <span class="n">glossed_tiril_sentence</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p>Change the folder to match the one on your computer, but leave the file names as they are.</p>
+<p>If you get an error says that ‘glom.py’ isn’t recognized, trying  type ‘.glom.py’ instead (this seems to be necessary in Windows Powershell).</p>
+<p>There is a full description of the CLI here, although most people will only ever need the <code class="docutils literal notranslate"><span class="pre">--input_file</span></code> and <code class="docutils literal notranslate"><span class="pre">--output_file</span></code> arguments.</p>
+<p><a class="reference external" href="#top">Return to top</a></p>
+</section>
+<section id="setting-up-glom">
+<h1><a class="toc-backref" href="#id14" role="doc-backlink">Setting Up GLOM</a><a class="headerlink" href="#setting-up-glom" title="Link to this heading">¶</a></h1>
+<p>Conceptually, there are a few different types of files that are used with GLOM. They’re all just plain text files though, so nothing complex is required. Each of these is explained in their own section below, and there are example files that are downloaded with GLOM.</p>
+<ol class="arabic simple">
+<li><p>An input file that tells GLOM which morphemes you want to glue together.</p></li>
+<li><p>Dictionary files, which are lists of morphemes paired with glosses. These are useful for root words, affixes, and grammatical particles.</p></li>
+<li><p>Paradigm files, which are tables of morphemes, organized by category. These are useful for representing information like verb conjugations, case endings, or independent pronoun sets.</p></li>
+<li><p>Sound change file (optional). GLOM can apply phonological rules to your words, after combining the morphemes together. You will be able to see words both before and after any changes take place.</p></li>
+</ol>
+<p><a class="reference external" href="#top">Return to top</a></p>
+<section id="the-input-file">
+<h2><a class="toc-backref" href="#id15" role="doc-backlink">The Input File</a><a class="headerlink" href="#the-input-file" title="Link to this heading">¶</a></h2>
+<p>The input file is a plain text file, where each line consists of an natural language translation (I’m using English) and then a sequence of glosses from your language. The included Tirilian input file looks like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="n">witness</span> <span class="n">testified</span>  <span class="n">witness</span><span class="o">-</span><span class="n">NOM</span><span class="o">.</span><span class="n">SG</span><span class="o">.</span><span class="n">ANIM</span> <span class="n">LAW</span><span class="o">-</span><span class="n">testify</span><span class="o">-</span><span class="n">ORALEV</span><span class="o">-</span><span class="n">PAST</span><span class="mf">.1</span><span class="o">.</span><span class="n">ANIM</span><span class="o">.</span><span class="n">UNWRIT</span>
+<span class="n">the</span> <span class="n">officer</span> <span class="n">made</span> <span class="n">an</span> <span class="n">error</span> <span class="ow">in</span> <span class="n">ruling</span>   <span class="n">officer</span><span class="o">.</span><span class="n">of</span><span class="o">.</span><span class="n">the</span><span class="o">.</span><span class="n">court</span><span class="o">-</span><span class="n">NOM</span><span class="o">.</span><span class="n">HON</span><span class="o">.</span><span class="n">ANIM</span> <span class="n">UNLAW</span><span class="o">-</span><span class="n">make</span><span class="o">.</span><span class="n">ruling</span><span class="o">-</span><span class="n">COMPL</span>
+<span class="n">the</span> <span class="n">judge</span> <span class="ow">is</span> <span class="n">reading</span> <span class="n">a</span> <span class="n">scroll</span>   <span class="n">judge</span><span class="o">-</span><span class="n">JHON</span><span class="o">-</span><span class="n">NOM</span><span class="o">.</span><span class="n">HON</span><span class="o">.</span><span class="n">ANIM</span> <span class="n">LAW</span><span class="o">-</span><span class="n">read</span><span class="o">-</span><span class="n">INCL</span> <span class="n">scroll</span><span class="o">-</span><span class="n">ACC</span><span class="o">.</span><span class="n">SG</span><span class="o">.</span><span class="n">INAN</span>
+</pre></div>
+</div>
+<p>You can separate the values with a tab, as I did here, or with a comma. If you’d prefer things in the other order, with glosses first, then run GLOM with the argument <code class="docutils literal notranslate"><span class="pre">--input_order</span> <span class="pre">gloss</span></code></p>
+<p><a class="reference external" href="#top">Return to top</a></p>
+</section>
+<section id="glossing-conventions">
+<h2><a class="toc-backref" href="#id16" role="doc-backlink">Glossing Conventions</a><a class="headerlink" href="#glossing-conventions" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Use spaces to separate words, use hyphens to separate morphemes within words.</p></li>
+<li><p>Use lower-case letters for lexical items, like ‘witness’ or ‘scroll’.</p></li>
+<li><p>Use upper-case letters or digits for grammatical categories, like ‘1’ for ‘first person’ or ‘NOM’ for ‘nominative case’.</p></li>
+<li><p>If you need more than one word to gloss a lexical item, separate each word by a period, like ‘officer.of.the.court’ or ‘make.ruling’</p></li>
+<li><p>If a morpheme represents more than one grammatical category, separate them by either a period, like NOM.HON.ANIM</p></li>
+</ul>
+<p><a class="reference external" href="#top">Return to top</a></p>
+</section>
+<section id="dictionary-files">
+<h2><a class="toc-backref" href="#id17" role="doc-backlink">Dictionary Files</a><a class="headerlink" href="#dictionary-files" title="Link to this heading">¶</a></h2>
+<p>In the context of GLOM, a dictionary is a plain text file where each line contains a morpheme in your language along with its gloss, separated by a comma or tab. These files should only include basic roots or affixes which cannot be decomposed into any smaller parts (“mono-morphemic lexical items”).</p>
+<p>The Trilian example has three files: roots.txt, with some basic nouns and verbs, evidentials.txt for a list of evidentials (obviously), and affixes.txt which is other stuff that I didn’t feel like categorizing more finely. You are free to divide up the information in whatever way makes sense to you, or just to use a huge unabbriged.txt file. You can modify your files at any point, so you aren’t locked into a particular categorization.</p>
+<p>roots.txt:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">law</span><span class="p">,</span><span class="n">sxat</span>
+<span class="n">judge</span><span class="p">,</span><span class="n">jaxt</span>
+<span class="n">witness</span><span class="p">,</span><span class="n">taw</span>
+<span class="n">scroll</span><span class="p">,</span><span class="n">ite</span>
+<span class="n">officer</span><span class="o">.</span><span class="n">of</span><span class="o">.</span><span class="n">the</span><span class="o">.</span><span class="n">court</span><span class="p">,</span><span class="n">pan</span>
+<span class="n">make</span><span class="o">.</span><span class="n">ruling</span><span class="p">,</span><span class="n">ta</span>
+<span class="n">testify</span><span class="p">,</span><span class="n">sut</span>
+<span class="n">read</span><span class="p">,</span><span class="n">hal</span>
+</pre></div>
+</div>
+<p>evidentials.txt:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">LITEV</span><span class="p">,</span><span class="n">fulu</span><span class="p">,</span><span class="n">information</span> <span class="n">obtained</span> <span class="kn">from</span> <span class="nn">a</span> <span class="n">written</span> <span class="n">source</span>
+<span class="n">ORALEV</span><span class="p">,</span><span class="n">tulu</span><span class="p">,</span><span class="n">information</span> <span class="n">obtained</span> <span class="n">by</span> <span class="n">talking</span> <span class="n">to</span> <span class="n">someone</span>
+<span class="n">PRECEV</span><span class="p">,</span><span class="n">unut</span><span class="p">,</span><span class="n">used</span> <span class="k">for</span> <span class="n">citing</span> <span class="n">legal</span> <span class="n">precedent</span>
+</pre></div>
+</div>
+<p>affixes.txt:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">HON</span><span class="p">,</span><span class="n">ti</span><span class="p">,</span><span class="n">honorific</span> <span class="n">added</span> <span class="n">to</span> <span class="n">many</span> <span class="n">legal</span> <span class="n">title</span>
+<span class="n">JHON</span><span class="p">,</span><span class="n">te</span><span class="p">,</span><span class="n">honorific</span> <span class="n">added</span> <span class="k">for</span> <span class="n">judges</span> <span class="n">specifically</span>
+<span class="n">LAW</span><span class="p">,</span><span class="o">-</span><span class="n">ife</span><span class="p">,</span><span class="n">action</span> <span class="n">done</span> <span class="ow">in</span> <span class="n">accordance</span> <span class="k">with</span> <span class="n">the</span> <span class="n">law</span>
+<span class="n">UNLAW</span><span class="p">,</span><span class="o">-</span><span class="n">sip</span><span class="p">,</span><span class="n">action</span> <span class="n">done</span> <span class="n">illegally</span>
+<span class="n">INCL</span><span class="p">,</span><span class="n">et</span><span class="o">-</span><span class="p">,</span><span class="n">incomplete</span><span class="p">,</span> <span class="ow">not</span> <span class="n">started</span><span class="p">,</span> <span class="n">hypothetical</span>
+<span class="n">COMPL</span><span class="p">,</span><span class="n">exe</span><span class="o">-</span><span class="p">,</span><span class="n">complete</span><span class="p">,</span> <span class="n">factual</span>
+</pre></div>
+</div>
+<p>The default formatting for dictionary files is to have the gloss first, then the morpheme in your language. If you prefer the reverse order, with the morpheme first, then run GLOM with the option <code class="docutils literal notranslate"><span class="pre">--dictionary_order</span> <span class="pre">morpheme</span></code>. Dictionary files can be tab or comma separated (as long as you are consistent within a file).</p>
+<p>GLOM also ignores everything after the second column, so you can write any additional notes that you want in there. Just like the input file, you can separate things by tabs instead of commas if you prefer, just be consistent across your files.</p>
+<p><a class="reference external" href="#top">Return to top</a></p>
+<section id="affix-types">
+<h3><a class="toc-backref" href="#id18" role="doc-backlink">Affix types</a><a class="headerlink" href="#affix-types" title="Link to this heading">¶</a></h3>
+<p>You can specify the affix type in the dictionary file using hyphens (or by adding a comment). This is optional, but can be useful for keeping track of your language. GLOM doesn’t need this information because you’ve already supplied the correct order of morphemes in your input to the program.</p>
+<p>Prefixes and suffixes are straightforward to implement, as shown above.</p>
+<p>Circumfixes can be treated as independent morphemes, and you can list them both in a dictionary file. For example, Tirillian has ‘criminal instrumental’ (CRIM) case marked by a circumfix a- -um. The dictionary file can be updated as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CRIM1</span><span class="p">,</span><span class="n">a</span><span class="o">-</span><span class="p">,</span><span class="n">implies</span> <span class="n">a</span> <span class="n">noun</span> <span class="n">was</span> <span class="n">used</span> <span class="n">to</span> <span class="n">commit</span> <span class="n">a</span> <span class="n">crime</span><span class="p">,</span> <span class="n">first</span> <span class="n">part</span> <span class="n">of</span> <span class="n">a</span> <span class="n">circumfix</span>
+<span class="n">CRIM2</span><span class="p">,</span><span class="o">-</span><span class="n">um</span><span class="p">,</span><span class="n">second</span> <span class="n">part</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">circumfix</span>
+<span class="n">art</span><span class="p">,</span><span class="n">wijax</span>
+</pre></div>
+</div>
+<p>Which can be used to create this glossed example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">awijaxum</span>
+<span class="n">a</span><span class="o">-</span><span class="n">wijax</span><span class="o">-</span><span class="n">um</span>
+<span class="n">CRIM1</span><span class="o">-</span><span class="n">art</span><span class="o">-</span><span class="n">CRIM2</span>
+<span class="s1">&#39;forgery&#39;</span>
+</pre></div>
+</div>
+<p>Unfortunately, infixes are not supported directly through GLOM. Infixation rules are often context-sensitive and require extra linguistic analysis, e.g. “insert after the first vowel” means you have to figure out what a ‘vowel’ is, and this might not be consistent across orthographies.</p>
+<p><a class="reference external" href="#top">Return to top</a></p>
+</section>
+</section>
+<section id="paradigm-files">
+<h2><a class="toc-backref" href="#id19" role="doc-backlink">Paradigm Files</a><a class="headerlink" href="#paradigm-files" title="Link to this heading">¶</a></h2>
+<p>A paradigm file is a chart or table, which is useful when your morphemes combine more than one meaning or category. Tirilian nouns are marked for nominative and accusative, and these paradigms are in a file called ‘case_endings.txt’ in the paradigms folder. This file contains one table for nominative:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">NOM</span><span class="p">,</span><span class="n">ANIM</span><span class="p">,</span><span class="n">INAN</span>
+<span class="n">SG</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">x</span>
+<span class="n">PL</span><span class="p">,</span><span class="n">ut</span><span class="p">,</span><span class="n">uti</span><span class="p">,</span><span class="n">xu</span>
+<span class="n">HON</span><span class="p">,</span><span class="n">tep</span><span class="p">,</span><span class="n">tapi</span><span class="p">,</span><span class="o">@</span>
+</pre></div>
+</div>
+<p>And another for accusative:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ACC</span><span class="p">,</span><span class="n">ANIM</span><span class="p">,</span><span class="n">INAN</span>
+<span class="n">SG</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">s</span>
+<span class="n">PL</span><span class="p">,</span><span class="n">al</span><span class="p">,</span><span class="n">uli</span><span class="p">,</span><span class="n">su</span>
+<span class="n">HON</span><span class="p">,</span><span class="n">sep</span><span class="p">,</span><span class="n">sapi</span><span class="p">,</span><span class="o">@</span>
+</pre></div>
+</div>
+<p>The first entry in each table must be the gloss for the paradigm. I chose NOM for nominative case and ACC for accusative case. The rest of table is interpreted as expected. The rows represent singular, plural, and honorific forms, while the columns represent animate and inanimate distinctions. The &#64; symbol means no morpheme is present. As elsewhere, you use commas or tabs, just be consistent within each file. You can put more than one table into a single file, but there has to be at least one blank line between them!</p>
+<p>To refer to a particular element in this table, you write the gloss as name.row.column. For example, if I need the accusative plural animate, I write the gloss ACC.PL.ANIM. If you’d prefer to read the tables columns first (so, ACC.ANIM.PL) then run GLOM with the argument –table_order column. (Just make sure you’re consistent!)</p>
+<p>After the tables, you can include an option “notes” section with information about the paradigm. This section must start with the “#” symbol. As soon as GLOM sees this, it stops reading the file, so you can’t include additional paradigms after your notes. There’s a notes section in the case_endings.txt file that you can check for yourself.</p>
+<p><a class="reference external" href="#top">Return to top</a></p>
+<section id="multi-dimensional-tables">
+<h3><a class="toc-backref" href="#id20" role="doc-backlink">Multi-dimensional tables</a><a class="headerlink" href="#multi-dimensional-tables" title="Link to this heading">¶</a></h3>
+<p>If you have a particularly complex morphology, a 2-dimensional table might not be enough.  Tirilian verbs encodes 3 dimensions of information in the past tense: grammatical number of the subject (1,2,3,honorific), grammatical gender of the subject (animate, inanimate), and whether the event is recorded somewhere in a law journal (written, unwritten/unsure if written).</p>
+<p>This is too much information to fit into a table, but it can be represented in columns like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PAST</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">ANIM</span><span class="p">,</span><span class="n">WRIT</span><span class="p">,</span><span class="n">x</span>
+<span class="n">PAST</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">ANIM</span><span class="p">,</span><span class="n">UNWRIT</span><span class="p">,</span><span class="n">s</span>
+<span class="n">PAST</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">INAM</span><span class="p">,</span><span class="n">WRIT</span><span class="p">,</span><span class="n">al</span>
+<span class="n">PAST</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">INAM</span><span class="p">,</span><span class="n">UNWRIT</span><span class="p">,</span><span class="n">el</span>
+<span class="n">PAST</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">ANIM</span><span class="p">,</span><span class="n">WRIT</span><span class="p">,</span><span class="n">xi</span>
+<span class="n">PAST</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">ANIM</span><span class="p">,</span><span class="n">UNWRIT</span><span class="p">,</span><span class="n">si</span>
+<span class="n">PAST</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">INAM</span><span class="p">,</span><span class="n">WRIT</span><span class="p">,</span><span class="n">il</span>
+<span class="n">PAST</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">INAM</span><span class="p">,</span><span class="n">UNWRIT</span><span class="p">,</span><span class="n">ul</span>
+<span class="n">PAST</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">ANIM</span><span class="p">,</span><span class="n">WRIT</span><span class="p">,</span><span class="n">xo</span>
+<span class="n">PAST</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">ANIM</span><span class="p">,</span><span class="n">UNWRIT</span><span class="p">,</span><span class="n">so</span>
+<span class="n">PAST</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">INAM</span><span class="p">,</span><span class="n">WRIT</span><span class="p">,</span><span class="n">ol</span>
+<span class="n">PAST</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">INAM</span><span class="p">,</span><span class="n">UNWRIT</span><span class="p">,</span><span class="n">olo</span>
+<span class="n">PAST</span><span class="p">,</span><span class="n">HON</span><span class="p">,</span><span class="n">ANIM</span><span class="p">,</span><span class="n">WRIT</span><span class="p">,</span><span class="n">atl</span>
+<span class="n">PAST</span><span class="p">,</span><span class="n">HON</span><span class="p">,</span><span class="n">ANIM</span><span class="p">,</span><span class="n">UNWRIT</span><span class="p">,</span><span class="n">etl</span>
+<span class="n">PAST</span><span class="p">,</span><span class="n">HON</span><span class="p">,</span><span class="n">INAM</span><span class="p">,</span><span class="n">WRIT</span><span class="p">,</span><span class="o">@</span>
+<span class="n">PAST</span><span class="p">,</span><span class="n">HON</span><span class="p">,</span><span class="n">INAM</span><span class="p">,</span><span class="n">UNWRIT</span><span class="p">,</span><span class="o">@</span>
+</pre></div>
+</div>
+<p>You can access these glosses the same as as with tables. For example, the firsrt person animinate unwritten past ‘s’ is glossed as PAST.1.ANIM.UNWRIT</p>
+<p><a class="reference external" href="#top">Return to top</a></p>
+</section>
+</section>
+<section id="sound-change-file-optional">
+<h2><a class="toc-backref" href="#id21" role="doc-backlink">Sound Change File (Optional)</a><a class="headerlink" href="#sound-change-file-optional" title="Link to this heading">¶</a></h2>
+<p>You can optionally add sound changes for your language. Each line of the sound change file must contain a phonological rule using a format like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">h</span> <span class="o">/</span> <span class="n">_</span><span class="p">[</span><span class="o">-</span><span class="n">back</span><span class="p">,</span><span class="o">+</span><span class="n">voc</span><span class="p">,</span><span class="o">-</span><span class="n">cons</span><span class="p">]</span>
+<span class="n">p</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">/</span> <span class="c1">#_</span>
+<span class="n">t</span> <span class="o">-&gt;</span> <span class="n">s</span> <span class="o">/</span> <span class="n">_t</span>
+<span class="o">@</span> <span class="o">-&gt;</span> <span class="n">j</span> <span class="o">/</span> <span class="p">[</span><span class="o">-</span><span class="n">cons</span><span class="p">,</span><span class="o">+</span><span class="n">voc</span><span class="p">]</span><span class="n">_</span><span class="p">[</span><span class="o">-</span><span class="n">cons</span><span class="p">,</span><span class="o">+</span><span class="n">voc</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The changes will be applied after GLOM has constructed words. Rules apply sequentially, in order. This can have an effect on the outcome. In this example, /x/ becomes /h/ before front vowel, and /p/ becomes /x/ at the beginning of words. Since they apply in this order, a word like /piti/ will always be pronounced as /xiti/. If the order of the rules were revered, then /piti/ would become /hiti/</p>
+<p>Sound changes are implemented using a version of my Ursus rule engine. For information about how to author the rules, please read <a class="reference external" href="https://readingglosses.com/user-guide-writing-phonological-rules/">this documentation</a>. You can also experiment with Ursus using <a class="reference external" href="https://phonology-readingglosses.pythonanywhere.com/">this web interface</a>, if you just want to play around with your phonology for a while.</p>
+</section>
+</section>
+<section id="output-file">
+<h1><a class="toc-backref" href="#id22" role="doc-backlink">Output File</a><a class="headerlink" href="#output-file" title="Link to this heading">¶</a></h1>
+<p>After processing your input, GLOM will produce a new file of glossed example sentences. The format of the output is as follows:</p>
+<ul class="simple">
+<li><p>Line 1: Transcription</p></li>
+<li><p>Line 2: Morpheme breakdown</p></li>
+<li><p>Line 3: Gloss</p></li>
+<li><p>Line 4: Translation</p></li>
+</ul>
+<p>If you ran GLOM with a sound change file, the change are applied to the transcription on line 1. The morpheme breakdown shows the ‘underlying forms’ before any rules. If you didn’t use a sound change file, then the transcription will look the same as the morpheme breakdown, except it won’t have any hyphens.</p>
+<p>Here’s part of the output from the example Tirilian files:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tawe</span> <span class="n">ihesutustulu</span>
+<span class="n">taw</span><span class="o">-</span><span class="n">e</span>               <span class="n">ixe</span><span class="o">-</span><span class="n">sut</span><span class="o">-</span><span class="n">ut</span><span class="o">-</span><span class="n">tulu</span>
+<span class="n">witness</span><span class="o">-</span><span class="n">NOM</span><span class="o">.</span><span class="n">SG</span><span class="o">.</span><span class="n">ANIM</span> <span class="n">LAW</span><span class="o">-</span><span class="n">testify</span><span class="o">-</span><span class="n">COMPL</span><span class="o">-</span><span class="n">ORALEV</span>
+<span class="n">a</span> <span class="n">witness</span> <span class="n">testified</span>
+</pre></div>
+</div>
+<p>The gloss and translation are exactly as in the input file, but the morphemes have been added, and left-aligned with words. Sound changes are also applied to the transcription: the /x/ in the LAW prefix becomes /h/ between vowels, and the /tt/ sequences at the boundary between the COMPL and ORALENV suffixes becomes /st/</p>
+<p><a class="reference external" href="#top">Return to top</a></p>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="#">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Introduction</a></li>
+<li><a class="reference internal" href="#getting-glom">Getting GLOM</a></li>
+<li><a class="reference internal" href="#running-glom">Running GLOM</a></li>
+<li><a class="reference internal" href="#setting-up-glom">Setting Up GLOM</a><ul>
+<li><a class="reference internal" href="#the-input-file">The Input File</a></li>
+<li><a class="reference internal" href="#glossing-conventions">Glossing Conventions</a></li>
+<li><a class="reference internal" href="#dictionary-files">Dictionary Files</a><ul>
+<li><a class="reference internal" href="#affix-types">Affix types</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#paradigm-files">Paradigm Files</a><ul>
+<li><a class="reference internal" href="#multi-dimensional-tables">Multi-dimensional tables</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sound-change-file-optional">Sound Change File (Optional)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#output-file">Output File</a></li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="#">GLOM 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Introduction</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2024, ReadingGlosses.com.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    </div>
+  </body>
+</html>

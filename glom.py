@@ -192,9 +192,9 @@ def generate_output_file(file_format, output_file, top_lines, morpheme_breakdown
 
     example = str()
     sentence_number = 0
-    if file_format == 'text':
+    if file_format in ['txt', 'text']:
         if not output_file.endswith('.txt'):
-            output_file += '.txt'
+            output_file = output_file.split('.')[0] + '.txt'
         with open(output_file, mode='w', encoding='utf-8') as f:
             for j in range(len(glosses)):
                 if add_sentence_numbers:
@@ -203,15 +203,20 @@ def generate_output_file(file_format, output_file, top_lines, morpheme_breakdown
                 print(example, file=f)
     elif file_format == 'pdf':
         if not output_file.endswith('.pdf'):
-            output_file += '.pdf'
+            output_file = output_file.split('.')[0]  + '.pdf'
         pdf = FPDF()
         pdf.add_page()
+        pdf.set_font("Courier", size=12)
+        +        line_height = 5
         pdf.set_font("Arial", size=12)
         for j in range(len(glosses)):
+            if pdf.get_y() + (line_height * 4) > pdf.page_break_trigger:
+                pdf.add_page()
+
             if add_sentence_numbers:
                 sentence_number += 1
-            example = align_glosses(morpheme_breakdowns[j], glosses[j], translations[j], sentence_number)
-            pdf.cell(200, 10, txt=example, ln=True)
+            example = align_glosses(top_lines[j], morpheme_breakdowns[j], glosses[j], translations[j], sentence_number)
+            pdf.multi_cell(0, line_height, txt=example)
         pdf.output(output_file)
 
     return example

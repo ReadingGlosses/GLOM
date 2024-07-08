@@ -45,8 +45,12 @@ def read_dictionary_files(cwd, dictionary_dir, dictionary_order):
     lexicon = dict()
     path = os.path.join(cwd, dictionary_dir)
     for file in os.listdir(path):
-        with open(os.path.join(path, file), encoding='utf-8') as f:
-            lines = [line.strip() for line in f if line.strip()]
+        try:
+            with open(os.path.join(path, file), encoding='utf-8') as f:
+                lines = [line.strip() for line in f if line.strip()]
+        except KeyError:
+            print(f'GLOM tried to open the dictionary file "\\dictionaries\\f{os.path.join(path,file)}" but could not find it. Check the spelling and make sure you have a folder called "{dictionary_dir}"')
+            sys.exit()
         sep = ',' if len(lines[0].split(',')) > 1 else '\t'
         for line in lines:
             if not line:
@@ -61,8 +65,12 @@ def read_paradigm_files(cwd, paradigm_dir, table_order):
     paradigms = dict()
     paradigm_dir = os.path.join(cwd, paradigm_dir)
     for file in os.listdir(os.path.join(cwd, paradigm_dir)):
-        with open(os.path.join(cwd, paradigm_dir, file), encoding='utf-8') as f:
-            data = f.read()
+        try:
+            with open(os.path.join(cwd, paradigm_dir, file), encoding='utf-8') as f:
+                data = f.read()
+        except KeyError:
+            print(f'GLOM tried to open a paradigm file called "{os.path.join(paradigm_dir, file)}" but could not find it. Make sure the spelling is correct and that the folder {paradigm_dir} exists.')
+            sys.exit()
         if '#' in data:
             data,comments = data.strip().split('#')
         sep = ',' if len(data[0].split(',')) > 1 else '\t'
@@ -207,7 +215,7 @@ def generate_output_file(file_format, output_file, top_lines, morpheme_breakdown
         pdf = FPDF()
         pdf.add_page()
         pdf.set_font("Courier", size=12)
-        +        line_height = 5
+        line_height = 5
         pdf.set_font("Arial", size=12)
         for j in range(len(glosses)):
             if pdf.get_y() + (line_height * 4) > pdf.page_break_trigger:
@@ -227,8 +235,13 @@ def apply_sound_changes(examples, cwd, sound_change_file):
 
     segbase = Segbase()
 
-    with open(os.path.join(cwd, sound_change_file)) as f:
-        rules = [Rule(line.strip()) for line in f if line.strip()]
+    try:
+        filename = os.path.join(cwd, sound_change_file)
+        with open(filename, encoding='utf-8') as f:
+            rules = [Rule(line.strip()) for line in f if line.strip()]
+    except FileNotFoundError as e:
+        print(f'You specified a sound change file called "{filename}" but that does\'t seem to exsit. Double check the name and spelling. The file must be in the same folder as the GLOM program.')
+        sys.exit()
 
     output = list()
     for e in examples:

@@ -174,8 +174,13 @@ def get_morphemes(glosses, lexicon, paradigms):
     return output, errors
 
 def read_input_file(cwd, input_file, input_order):
-    with open(os.path.join(cwd, input_file), encoding='utf-8') as f:
-        lines = [line.strip() for line in f]
+    try:
+        with open(os.path.join(cwd, input_file), encoding='utf-8') as f:
+            lines = [line.strip() for line in f]
+    except FileNotFoundError:
+        print(f'GLOM tried opening the intput file "{input_file}" but could not find it. Make sure the name is typed correctly, and that it is in the same folder as GLOM.')
+        sys.exit()
+
     glosses = list()
     translations = list()
     sep = ',' if len(lines[0].split(',')) > 1 else '\t'
@@ -240,7 +245,7 @@ def apply_sound_changes(examples, cwd, sound_change_file):
         with open(filename, encoding='utf-8') as f:
             rules = [Rule(line.strip()) for line in f if line.strip()]
     except FileNotFoundError as e:
-        print(f'You specified a sound change file called "{filename}" but that does\'t seem to exsit. Double check the name and spelling. The file must be in the same folder as the GLOM program.')
+        print(f'You specified a sound change file called "{filename}" but GLOM could not find it. Double check the name and spelling. The file must be in the same folder as the GLOM program.')
         sys.exit()
 
     output = list()
@@ -277,7 +282,7 @@ def construct_examples(input_file,
     top_lines = apply_sound_changes(morpheme_breakdowns, cwd, sound_change_file)
     example_sentence = generate_output_file(file_format, output_file, top_lines, morpheme_breakdowns, glosses, morphemes, add_sentence_numbers)
 
-    if errors:
+    if len(errors)>0:
         print(f'WARNING: The following {len(errors)} items in your input file could not be located in any dictionary or paradigm:\n')
         print(','.join(sorted([str(e) for e in errors])))
         print(f'\nThese have been replaced by \'?\' in {output_file}.')
@@ -292,6 +297,7 @@ def construct_examples(input_file,
         print('Here is the last sentence from your input file:\n ')
         print(example_sentence)
 
+    return errors
 
 
 if __name__ == '__main__':

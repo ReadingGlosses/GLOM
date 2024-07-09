@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 import glom
 import os
+import sys
 
 class ToolTip:
     def __init__(self, widget, text):
@@ -33,6 +34,8 @@ class ToolTip:
             tw.destroy()
 
 
+
+
 def run_app():
     input_file = input_file_entry.get()
     output_file = output_file_entry.get()
@@ -55,11 +58,13 @@ def run_app():
         output_file = input_file.split('.')[0]+'_glossed.txt'
 
     if not os.path.exists(os.path.join(os.getcwd(), input_file)):
+    #if not os.path.exists(resource_path(input_file)):
         messagebox.showerror("File Not Found", "The input file you specified cannot be found. Double-check the spelling and make sure it is in the same folder as GLOM.")
         return
 
     if sound_changes:
         if not os.path.exists(os.path.join(os.getcwd(),sound_changes)):
+        #if not os.path.exists(resource_path(sound_changes)):
             messagebox.showerror("File Not Found", f"The sound change file you specified cannot be found. Double-check the spelling and make sure it is in the same folder as GLOM.")
             return
 
@@ -110,7 +115,7 @@ def browse_directory(entry):
         entry.insert(0, os.path.basename(directory))
 
 app = tk.Tk()
-app.title("GLOM - A tool for generating glossed example sentences")
+app.title("GLOM - a glossing tool from ReadingGlosses.com")
 app.resizable(False, False)
 
 # Input File
@@ -124,7 +129,7 @@ ToolTip(input_label, "Select the input file containing the sentences to work wit
 
 # Output File
 row +=1
-output_label = tk.Label(app, text="Output File (just enter a name, not a full path)")
+output_label = tk.Label(app, text="Output File:")
 output_label.grid(row=row, column=0, sticky=tk.W)
 output_file_entry = tk.Entry(app, width=50)
 output_file_entry.grid(row=1, column=1, padx=5, pady=5)
@@ -137,7 +142,7 @@ sound_change_label.grid(row=row, column=0, sticky=tk.W)
 sound_changes_entry = tk.Entry(app, width=50)
 sound_changes_entry.grid(row=2, column=1, padx=5, pady=5)
 tk.Button(app, text="Browse", command=lambda: browse_file(sound_changes_entry)).grid(row=2, column=2, padx=5, pady=5)
-ToolTip(sound_change_label, "Select a file containing sound change rules. This is optional. Consult the documentation at www.readingglosses.com/apps for details.")
+ToolTip(sound_change_label, "Select a file containing sound change rules. Consult the documentation for details.")
 
 # Dictionary Directory
 row +=1
@@ -200,6 +205,6 @@ ToolTip(table_order_label, "Choose the order that GLOM should read your paradigm
 
 # Run Button
 row +=1
-tk.Button(app, text="Create sentences", command=run_app).grid(row=row, column=1, pady=10)
+tk.Button(app, text="Generate glossed sentences!", command=run_app).grid(row=row, column=0, pady=10)
 
 app.mainloop()

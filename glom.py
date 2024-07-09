@@ -2,9 +2,19 @@ import os
 import sys
 import re
 import argparse
+import sys
 from fpdf import FPDF
 from ursus.rules import Rule
 from ursus.segbase import Segbase
+
+def resource_path(relative_path):
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 def query_lexicon(lexicon, morpheme, errors):
     try:
@@ -44,6 +54,7 @@ def align_glosses(top_line, morpheme_breakdown, glosses, translation, number=0):
 def read_dictionary_files(cwd, dictionary_dir, dictionary_order):
     lexicon = dict()
     path = os.path.join(cwd, dictionary_dir)
+    #path = resource_path(dictionary_dir)
     for file in os.listdir(path):
         try:
             with open(os.path.join(path, file), encoding='utf-8') as f:
@@ -64,12 +75,14 @@ def read_dictionary_files(cwd, dictionary_dir, dictionary_order):
 def read_paradigm_files(cwd, paradigm_dir, table_order):
     paradigms = dict()
     paradigm_dir = os.path.join(cwd, paradigm_dir)
+    #paradigm_dir = resource_path(paradigm_dir)
     for file in os.listdir(os.path.join(cwd, paradigm_dir)):
         try:
-            with open(os.path.join(cwd, paradigm_dir, file), encoding='utf-8') as f:
+            #with open(os.path.join(cwd, paradigm_dir, file), encoding='utf-8') as f:
+            with open(os.path.join(paradigm_dir, file), encoding='utf-8') as f:
                 data = f.read()
         except KeyError:
-            print(f'GLOM tried to open a paradigm file called "{os.path.join(paradigm_dir, file)}" but could not find it. Make sure the spelling is correct and that the folder {paradigm_dir} exists.')
+            print(f'GLOM tried to open a paradigm file called "{file}" but could not find it. Make sure the spelling is correct and that the folder {paradigm_dir} exists.')
             sys.exit()
         if '#' in data:
             data,comments = data.strip().split('#')
@@ -84,7 +97,6 @@ def read_paradigm_files(cwd, paradigm_dir, table_order):
 
             if len([x for x in second_row if x.isupper()])>2:
                 #if there are at least two upper-case glosses in the second row, it's not a 2-dimenational table
-                #d = {}
                 for line in block.strip().split("\n"):
                     parts = line.split(",")
                     *keys, value = parts
@@ -176,6 +188,7 @@ def get_morphemes(glosses, lexicon, paradigms):
 def read_input_file(cwd, input_file, input_order):
     try:
         with open(os.path.join(cwd, input_file), encoding='utf-8') as f:
+        #with open(resource_path(input_file), encoding='utf-8') as f:
             lines = [line.strip() for line in f]
     except FileNotFoundError:
         print(f'GLOM tried opening the intput file "{input_file}" but could not find it. Make sure the name is typed correctly, and that it is in the same folder as GLOM.')
@@ -238,14 +251,15 @@ def apply_sound_changes(examples, cwd, sound_change_file):
     if not sound_change_file:
         return [e.replace('-', '') for e in examples]
 
-    segbase = Segbase()
+    segbase = Segbase(path=resource_path(os.path.join('ursus','data','ipa2spe.txt')))
 
     try:
-        filename = os.path.join(cwd, sound_change_file)
-        with open(filename, encoding='utf-8') as f:
+        path = os.path.join(cwd, sound_change_file)
+        #path = resource_path(sound_change_file)
+        with open(path, encoding='utf-8') as f:
             rules = [Rule(line.strip()) for line in f if line.strip()]
     except FileNotFoundError as e:
-        print(f'You specified a sound change file called "{filename}" but GLOM could not find it. Double check the name and spelling. The file must be in the same folder as the GLOM program.')
+        print(f'You specified a sound change file called "{sound_change_file}" but GLOM could not find it. Double check the name and spelling. The file must be in the same folder as the GLOM program.')
         sys.exit()
 
     output = list()

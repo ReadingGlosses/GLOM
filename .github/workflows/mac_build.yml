@@ -1,3 +1,6 @@
+What's wrong with this file? Git gives me a useless message "Process completed with exit code 2."
+
+
 name: Build macOS Executable
 
 on:
@@ -29,7 +32,7 @@ jobs:
 
     - name: Build executable
       run: |
-        pyinstaller --onefile --add-data "ursus;ursus" --add-data "ursus/data;ursus/data" --name GLOM --noconsole gui.py
+        pyinstaller --onefile --add-data "ursus:ursus" --add-data "ursus/data:ursus/data" --name GLOM --noconsole gui.py
 
     - name: Upload artifact
       uses: actions/upload-artifact@v2

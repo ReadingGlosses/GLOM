@@ -1,6 +1,3 @@
-What's wrong with this file? Git gives me a useless message "Process completed with exit code 2."
-
-
 name: Build macOS Executable
 
 on:

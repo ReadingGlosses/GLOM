@@ -1,0 +1,8 @@
+law,sxat
+judge,jaxt
+witness,taw
+scroll,ite
+officer.of.the.court,pan
+make.ruling,ta
+testify,sut
+read,hal

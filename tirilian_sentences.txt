@@ -1,0 +1,4 @@
+a witness testified	witness-NOM.SG.ANIM LAW-testify-ORALEV-PAST.1.ANIM.UNWRIT
+the officer made an error in ruling	officer.of.the.court-NOM.HON.ANIM UNLAW-make.ruling-COMPL
+the judge is reading a scroll	judge-JHON-NOM.HON.ANIM LAW-read-INCL scroll-ACC.SG.INAN
+

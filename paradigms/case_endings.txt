@@ -1,0 +1,18 @@
+NOM,ANIM,INAN
+SG,e,i,x
+PL,ut,uti,xu
+HON,tep,tapi,@
+
+ACC,ANIM,INAN
+SG,u,a,s
+PL,al,uli,su
+HON,sep,sapi,@
+
+#Notes
+NOM=nominative, suffixed on nouns
+ANIM=animate
+INAN=inanimate
+SG=singular
+PL=plural
+HON=honorific, no number distinction
+There is no honorific inanimate

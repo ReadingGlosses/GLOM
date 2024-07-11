@@ -1,0 +1,7 @@
+HON,ti,honorific added to many legal title
+JHON,te,honorific added for judges specifically
+LAW,-ixe,action done in accordance with the law
+UNLAW,-isi,action done illegally
+NOLAW,-utix,action not covered specifically by the law
+INCL,et-,incomplete, not started, hypothetical
+COMPL,ut-,complete, factual

@@ -1,0 +1,3 @@
+LITEV,fulu,information obtained from a written source
+ORALEV,tulu,information obtained by talking to someone
+PRECEV,unut,used for citing legal precedent

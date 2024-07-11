@@ -1,0 +1,4 @@
+@ -> j / [-cons,+voc]_[-cons,+voc]
+x -> h / _[-back,+voc,-cons]
+p -> px / #_
+t -> s / _t

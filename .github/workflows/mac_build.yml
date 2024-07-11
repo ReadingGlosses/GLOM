@@ -6,7 +6,7 @@ on:
       - mac_build
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: macos-11
 
     steps:
     - name: Checkout code

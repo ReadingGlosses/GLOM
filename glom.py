@@ -1,11 +1,18 @@
 import os
 import sys
+import subprocess
 import re
 import argparse
 import sys
-from fpdf import FPDF
 from ursus.rules import Rule
 from ursus.segbase import Segbase
+
+try:
+    import fpdf
+except ImportError:
+    package = 'fpdf'
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+    __import__(package)
 
 def resource_path(relative_path):
     try:
